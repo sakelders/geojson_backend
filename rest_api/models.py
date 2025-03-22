@@ -1,3 +1,5 @@
-from django.db import models
+from django.contrib.gis.db import models
 
-# Create your models here.
+class Municipality(models.Model):
+    name = models.CharField(max_length=255)
+    polygons = models.MultiPolygonField()
