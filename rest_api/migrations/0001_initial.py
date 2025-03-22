@@ -8,7 +8,7 @@ from django.contrib.gis.geos import Polygon, MultiPolygon
 
 
 def _create_polygon_from_data(polygon_data):
-    return Polygon([(long, lang) for long, lang in polygon_data])
+    return Polygon([(lon, lat) for lon, lat in polygon_data])
 
 def load_initial_data(apps, schema_editor):
     Municipality = apps.get_model('rest_api', 'Municipality')
