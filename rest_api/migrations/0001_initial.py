@@ -6,6 +6,8 @@ from django.db import migrations, models
 from django.conf import settings
 from django.contrib.gis.geos import Polygon, MultiPolygon
 
+geojson.geometry.DEFAULT_PRECISION = 15
+
 
 def _create_polygon_from_data(polygon_data):
     return Polygon([(lon, lat) for lon, lat in polygon_data])

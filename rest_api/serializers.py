@@ -1,3 +1,4 @@
+from rest_framework_gis.fields import GeometryField
 from rest_framework_gis.serializers import GeoFeatureModelSerializer
 
 from rest_api.models import Municipality
