@@ -1,4 +1,7 @@
-from rest_framework.viewsets import ModelViewSet
+from rest_framework.generics import ListAPIView
+from rest_framework.mixins import CreateModelMixin, RetrieveModelMixin, UpdateModelMixin, DestroyModelMixin
+from rest_framework.viewsets import ModelViewSet, GenericViewSet
+from rest_framework_gis.filters import InBBoxFilter
 from rest_framework_gis.pagination import GeoJsonPagination
 
 from rest_api.models import Municipality
@@ -10,7 +13,21 @@ class MunicipalityPagination(GeoJsonPagination):
     page_size_query_param = 'page_size'
 
 
-class MunicipalityViewSet(ModelViewSet):
+class BoundingBoxMunicipalityPagination(GeoJsonPagination):
+    page_size = 25
+    page_size_query_param = 'page_size'
+
+
+class MunicipalityViewSet(RetrieveModelMixin, UpdateModelMixin, DestroyModelMixin, GenericViewSet):
     queryset = Municipality.objects.all()
     serializer_class = MunicipalitySerializer
     pagination_class = MunicipalityPagination
+
+
+class MunicipalitiesListCreateView(ListAPIView, CreateModelMixin):
+    queryset = Municipality.objects.all()
+    serializer_class = MunicipalitySerializer
+    bbox_filter_field = 'polygons'
+    filter_backends = (InBBoxFilter,)
+    bbox_filter_include_overlapping = True
+    pagination_class = BoundingBoxMunicipalityPagination
