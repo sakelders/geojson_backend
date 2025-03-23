@@ -7,4 +7,4 @@ class MunicipalitySerializer(GeoFeatureModelSerializer):
     class Meta:
         model = Municipality
         geo_field = 'polygons'
-        fields = ['name']
+        fields = ['pk', 'name']
