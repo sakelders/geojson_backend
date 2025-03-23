@@ -1,4 +1,4 @@
-from rest_framework.generics import ListAPIView
+from rest_framework.generics import ListAPIView, CreateAPIView
 from rest_framework.mixins import CreateModelMixin, RetrieveModelMixin, UpdateModelMixin, DestroyModelMixin
 from rest_framework.viewsets import ModelViewSet, GenericViewSet
 from rest_framework_gis.filters import InBBoxFilter
@@ -24,7 +24,7 @@ class MunicipalityViewSet(RetrieveModelMixin, UpdateModelMixin, DestroyModelMixi
     pagination_class = MunicipalityPagination
 
 
-class MunicipalitiesListCreateView(ListAPIView, CreateModelMixin):
+class MunicipalitiesListCreateView(ListAPIView, CreateAPIView):
     queryset = Municipality.objects.all()
     serializer_class = MunicipalitySerializer
     bbox_filter_field = 'polygons'
