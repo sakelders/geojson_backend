@@ -1,9 +1,10 @@
-from rest_framework import serializers
+from rest_framework_gis.serializers import GeoFeatureModelSerializer
 
 from rest_api.models import Municipality
 
 
-class MunicipalitySerializer(serializers.ModelSerializer):
+class MunicipalitySerializer(GeoFeatureModelSerializer):
     class Meta:
         model = Municipality
-        fields = ['name', 'polygons']
+        geo_field = 'polygons'
+        fields = ['name']
