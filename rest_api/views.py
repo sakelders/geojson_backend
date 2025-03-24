@@ -9,19 +9,13 @@ from rest_api.serializers import MunicipalitySerializer
 
 
 class MunicipalityPagination(GeoJsonPagination):
-    page_size = 25
-    page_size_query_param = 'page_size'
-
-
-class BoundingBoxMunicipalityPagination(GeoJsonPagination):
-    page_size = 25
+    page_size = 100
     page_size_query_param = 'page_size'
 
 
 class MunicipalityViewSet(RetrieveModelMixin, UpdateModelMixin, DestroyModelMixin, GenericViewSet):
     queryset = Municipality.objects.all()
     serializer_class = MunicipalitySerializer
-    pagination_class = MunicipalityPagination
 
 
 class MunicipalitiesListCreateView(ListAPIView, CreateAPIView):
@@ -30,4 +24,4 @@ class MunicipalitiesListCreateView(ListAPIView, CreateAPIView):
     bbox_filter_field = 'polygons'
     filter_backends = (InBBoxFilter,)
     bbox_filter_include_overlapping = True
-    pagination_class = BoundingBoxMunicipalityPagination
+    pagination_class = MunicipalityPagination
