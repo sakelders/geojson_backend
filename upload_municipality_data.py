@@ -33,10 +33,7 @@ class FeatureUploader:
     def _get_polygons_from_feature(self, feature):
         multipolygon = feature[1]
         polygons = multipolygon.geoms
-        polygon_coordinates = []
-        for polygon in polygons:
-            polygon_coordinates.append(self._get_coordinates_from_polygon(polygon))
-        return polygon_coordinates
+        return list(map(self._get_coordinates_from_polygon, polygons))
 
 def upload_data(data_filename, create_endpoint):
     uploader = FeatureUploader(create_endpoint)
