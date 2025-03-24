@@ -1,0 +1,9 @@
+django
+django-extensions
+djangorestframework
+djangorestframework-gis
+geojson
+geopandas
+progressbar
+psycopg
+requests
